@@ -5,6 +5,9 @@ document.addEventListener('DOMContentLoaded', () => {
 
     let exercises = [];
 
+    // Load saved workouts from local storage on page load
+    loadWorkouts();
+
     addExerciseButton.addEventListener('click', () => {
         const exerciseName = document.getElementById('exerciseName').value;
         const sets = document.getElementById('sets').value;
@@ -26,20 +29,28 @@ document.addEventListener('DOMContentLoaded', () => {
         const workoutDate = document.getElementById('workoutDate').value;
 
         if (workoutName && workoutDate) {
-            displayWorkout(workoutName, workoutDate, exercises);
-            exercises = [];  
-            workoutForm.reset();  
+            const workout = {
+                workoutName,
+                workoutDate,
+                exercises
+            };
+
+            saveWorkout(workout);  // Save to local storage
+            displayWorkout(workout); // Display workout immediately
+
+            exercises = [];  // Clear exercises array for new workout
+            workoutForm.reset();  // Reset form fields
         } else {
             alert('Please fill in all workout fields.');
         }
     });
 
-    function displayWorkout(workoutName, workoutDate, exercises) {
+    function displayWorkout(workout) {
         const workoutDiv = document.createElement('div');
         workoutDiv.classList.add('workout');
 
-        let workoutHTML = `<h3>${workoutName} - ${workoutDate}</h3><ul>`;
-        exercises.forEach(exercise => {
+        let workoutHTML = `<h3>${workout.workoutName} - ${workout.workoutDate}</h3><ul>`;
+        workout.exercises.forEach(exercise => {
             workoutHTML += `<li>${exercise.exerciseName} - ${exercise.sets} sets x ${exercise.reps} reps @ ${exercise.weight} kg</li>`;
         });
         workoutHTML += '</ul>';
@@ -47,4 +58,16 @@ document.addEventListener('DOMContentLoaded', () => {
         workoutDiv.innerHTML = workoutHTML;
         workoutContainer.appendChild(workoutDiv);
     }
+
+    function saveWorkout(workout) {
+        let workouts = JSON.parse(localStorage.getItem('workouts')) || [];
+        workouts.push(workout);
+        localStorage.setItem('workouts', JSON.stringify(workouts));
+    }
+
+    function loadWorkouts() {
+        const workouts = JSON.parse(localStorage.getItem('workouts')) || [];
+        workouts.forEach(displayWorkout);
+    }
 });
+
