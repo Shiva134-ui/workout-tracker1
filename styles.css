@@ -1,6 +1,7 @@
 body {
     font-family: Arial, sans-serif;
-    background-color: #f4f4f4;
+    background-color: #000000;
+    color: white;
     margin: 0;
     padding: 20px;
 }
@@ -8,13 +9,18 @@ body {
 .container {
     max-width: 600px;
     margin: auto;
-    background: white;
+    background: rgb(35, 34, 34);
     padding: 20px;
     border-radius: 8px;
     box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
 }
 
-h1, h2, h3 {
+h1 {
+    text-align: center;
+    color:  #007BFF;
+}
+
+h2, h3 {
     text-align: center;
 }
 
@@ -29,6 +35,8 @@ label {
 
 input, button {
     padding: 10px;
+    background-color: gray; 
+    border: none;
     margin-top: 5px;
     border-radius: 5px;
     border: 1px solid #ddd;
@@ -46,51 +54,12 @@ button:hover {
     background-color: #0056b3;
 }
 
-#workoutContainer {
-    margin-top: 20px;
-}
-
-.workout {
-    background: #e9e9e9;
-    margin-bottom: 15px;
-    padding: 10px;
+#authorizeButton {
+    background-color: #4285f4;
+    color: white;
+    padding: 10px 20px;
+    border: none;
     border-radius: 5px;
-}
-
-@media (max-width: 768px) {
-    .container {
-        padding: 15px;
-    }
-
-    input, button {
-        padding: 8px;
-        font-size: 14px;
-    }
-
-    h1, h2, h3 {
-        font-size: 1.5em;
-    }
-}
-
-@media (max-width: 480px) {
-    .container {
-        padding: 10px;
-    }
-
-    input, button {
-        padding: 6px;
-        font-size: 12px;
-    }
-
-    h1, h2, h3 {
-        font-size: 1.2em;
-    }
-
-    form {
-        flex-direction: column;
-    }
-
-    button {
-        margin-top: 8px;
-    }
+    cursor: pointer;
+    margin-bottom: 20px;
 }
