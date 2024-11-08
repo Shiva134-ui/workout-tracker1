@@ -88,6 +88,10 @@ button:hover {
     margin-bottom: 15px;
 }
 
+.login-link{
+    text-decoration: none;
+}
+
 .forgot-password a {
     text-decoration: none;
     font-size: 14px;
