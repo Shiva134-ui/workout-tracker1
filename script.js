@@ -73,84 +73,46 @@ document.addEventListener('DOMContentLoaded', () => {
 
 
 
-// Firebase configuration (replace with your own Firebase project settings)
+
 const firebaseConfig = {
-    apiKey: "AIzaSyCl28Pl70pXRLYFmsO6ZyyB0JiXIVdalrM",
-    authDomain: "fit-log-ec7c2.firebaseapp.com",
-    projectId: "fit-log-ec7c2",
-    storageBucket: "fit-log-ec7c2.appspot.com",
-    messagingSenderId: "262700364589",
-    appId: "1:262700364589:web:ea3851cbd3a6bcc650d9a4"
-};
-
-// Initialize Firebase
-firebase.initializeApp(firebaseConfig);
-const auth = firebase.auth();
-const db = firebase.firestore();
-
-// Check if user is logged in
-if (localStorage.getItem('isLoggedIn') === 'true') {
-    document.getElementById('loginContainer').classList.add('hidden');
-    document.getElementById('profileIcon').classList.remove('hidden');
-} else {
-    document.getElementById('loginContainer').classList.remove('hidden');
-}
-
-// Handle Login
-document.getElementById('loginButton').addEventListener('click', async () => {
-    const email = document.getElementById('email').value;
-    const password = document.getElementById('password').value;
-
-    try {
-        const userCredential = await auth.signInWithEmailAndPassword(email, password);
-        const user = userCredential.user;
-
-        // Store login status in localStorage
-        localStorage.setItem('isLoggedIn', 'true');
-
-        // Save user info in Firestore (if needed)
-        await db.collection('users').doc(user.uid).set({
-            email: user.email,
-            lastLogin: firebase.firestore.FieldValue.serverTimestamp()
-        }, { merge: true });
-
-        // Hide login form and show profile icon
-        document.getElementById('loginContainer').classList.add('hidden');
-        document.getElementById('profileIcon').classList.remove('hidden');
-    } catch (error) {
-        console.error("Login error:", error.message);
-        alert("Login failed. Please check your credentials.");
-    }
-});
-
-// Handle Logout (Optional: You can add a logout button and logic)
-function logout() {
-    auth.signOut().then(() => {
-        localStorage.removeItem('isLoggedIn');
-        document.getElementById('loginContainer').classList.remove('hidden');
-        document.getElementById('profileIcon').classList.add('hidden');
-    }).catch(error => {
-        console.error("Logout error:", error.message);
+    apiKey: "AIzaSyD4g4wgxe8Tvc9JgMX27tEv6jcqh10aahM",
+    authDomain: "auth-fit-log.firebaseapp.com",
+    databaseURL: "https://auth-fit-log-default-rtdb.firebaseio.com",
+    projectId: "auth-fit-log",
+    storageBucket: "auth-fit-log.firebasestorage.app",
+    messagingSenderId: "1093830165635",
+    appId: "1:1093830165635:web:e70daaa9ec0569419687b6"
+  };
+  
+  // initialize firebase
+  firebase.initializeApp(firebaseConfig);
+  
+  // reference your database
+  var contactFormDB = firebase.database().ref("contactForm");
+  
+  document.getElementById("contactForm").addEventListener("submit", submitForm);
+  
+  function submitForm(e) {
+    e.preventDefault();
+  
+    var name = getElementVal("name");
+    var password = getElementVal("password");
+    saveMessages(name, password);
+  
+  
+    //   reset the form
+    document.getElementById("contactForm").reset();
+  }
+  
+  const saveMessages = (name, password) => {
+    var newContactForm = contactFormDB.push();
+  
+    newContactForm.set({
+      name: name,
+      password: password,
     });
-}
-
-
-const app = firebase.initializeApp(firebaseConfig);
-
-
-
-// Function to change the profile icon image after login
-function updateProfileIcon() {
-    const profileIcon = document.getElementById("profileIcon");
-    
-    if (profileIcon) {
-        // Change the profile image to a new one after login
-        profileIcon.querySelector("img").src = "logged-in-profile.jpg";
-    }
-}
-
-// Simulate login and call `updateProfileIcon`
-document.querySelector(".login-box form").addEventListener("submit", function(event) {
-    event.preventDefault(); // Prevent default form submission for demo purposes
-    updateProfileIcon(); // Update the icon
-});
+  };
+  
+  const getElementVal = (id) => {
+    return document.getElementById(id).value;
+  };
