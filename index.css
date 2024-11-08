@@ -1,0 +1,107 @@
+body {
+    font-family: Arial, sans-serif;
+    background-color: #000000;
+    color: white;
+    margin: 0;
+    padding: 20px;
+}
+
+.container {
+    max-width: 600px;
+    margin: auto;
+    background: rgb(35, 34, 34);
+    padding: 20px;
+    border-radius: 8px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    position: relative; /* To position the profile icon inside */
+}
+
+h1 {
+    text-align: center;
+    color: #007BFF;
+    margin-top: 20px; /* Add margin to ensure it does not overlap with the profile icon */
+}
+
+h2, h3 {
+    text-align: center;
+}
+
+form {
+    display: flex;
+    flex-direction: column;
+}
+
+label {
+    margin-top: 10px;
+}
+
+input, button {
+    padding: 10px;
+    background-color: rgb(140, 143, 143);
+    border: none;
+    margin-top: 5px;
+    border-radius: 5px;
+    border: 1px solid #ddd;
+}
+
+button {
+    margin-top: 10px;
+    background-color: #007BFF;
+    color: white;
+    border: none;
+    cursor: pointer;
+}
+
+button:hover {
+    background-color: #0056b3;
+}
+
+#authorizeButton {
+    background-color: #4285f4;
+    color: white;
+    padding: 10px 20px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    margin-bottom: 20px;
+}
+
+.workout {
+    margin-bottom: 20px;
+    padding: 10px;
+    background-color: #1c1c1c;
+    border-radius: 5px;
+    border: 1px solid #333;
+}
+
+.workout h3 {
+    color: #00bfff;
+}
+
+.workout ul {
+    padding-left: 20px;
+    list-style-type: none;
+}
+
+.workout li {
+    margin: 5px 0;
+}
+
+/* Profile icon styling */
+.profile-icon {
+    position: absolute;
+    top: 20px;
+    left: 20px;
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    overflow: hidden;
+    border: 2px solid #007BFF;
+    box-shadow: 0 0 5px rgba(0, 0, 0, 0.3);
+}
+
+.profile-icon img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
